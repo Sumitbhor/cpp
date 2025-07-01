@@ -14,12 +14,8 @@ public:
     //constructor
     Employee();
 
-
-    
     //parametrised constructor
     Employee(int empId,string& empName,  double empSalary);
-
-
 
     //function
     virtual void displayInfo();
