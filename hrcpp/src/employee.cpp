@@ -23,9 +23,9 @@ Employee::Employee( int empId, string& empName, double empSalary) {
 
 
 void Employee::displayInfo() {
-    cout << "Employee ID: " << id << endl;
-    cout << "Name: " << name << endl;
-    cout << "Salary: $" << salary << endl;
+    cout << "\nEmployee ID: " << id << endl;
+    cout << "\nName: " << name << endl;
+    cout << "\nSalary: $" << salary << endl;
 }
 
 Employee::~Employee() {
