@@ -25,10 +25,7 @@ public:
     }
 
     void serialize( ofstream & fout){
-        fout<<name<<endl;
-        fout<<age<<endl;
-        fout<<courseName<<endl;
-
+        fout<<name<< age<< courseName<<endl;
     }
 
     void deserialize(ifstream & fin ){
@@ -66,9 +63,9 @@ class filemanager {
 int main(){
     cout<<"welcome"<<endl;
 
-    student s1 ("sanika",20, "B.E comp");
-    student s2 ("om",21, "B.tech comp");
-    student s3 ("nikhil",19, "B.tech a.i");
+    student s1 (" sanika ",20, " B.E comp ");
+    student s2 (" om ",21, " B.tech comp ");
+    student s3 (" nikhil ",19, " B.tech a.i ");
     student s4 ();
 
     vector <student> students ;
