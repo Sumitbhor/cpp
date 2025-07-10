@@ -72,6 +72,7 @@ bool insertquestions( int id ,int subjectid , string& title, string& a , string&
         }
         return true;
 }
+
 bool update(int id,
             int subjectid , 
             string& title, 
@@ -93,6 +94,16 @@ bool update(int id,
         return true;
 
     }
+    void deletequestion(int id)
+    {
+        char query[256];
+        sprintf(query, "DELETE FROM questionbank WHERE id=%d", id);
+        if (mysql_query(conn, query))
+        {
+            cerr << "Delete query failed. Error: " << mysql_error(conn) << "\n";
+        }
+    }
+
 
 };
 
@@ -108,7 +119,8 @@ int main()
         cout<<"\n1. Insert Question\n";
         cout<<"2. Display Questions\n";
         cout<<"3. Update Question\n";
-        cout<<"4. Exit\n";
+        cout<<"4. Delete Question\n";
+        cout<<"5. Exit\n";
         cin>>choice;
 
 
@@ -185,6 +197,15 @@ int main()
             }
             break;
         case 4:
+            {
+                int id;
+                cout << "Enter ID of the question to delete: ";
+                cin >> id;
+                ptrdbmanager->deletequestion(id);
+            }
+            break;  
+        
+        case 5:
             delete ptrdbmanager;
             cout << "Exiting the program.\n";
             return 0;
