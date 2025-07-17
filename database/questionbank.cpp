@@ -7,7 +7,7 @@ using namespace std ;
 class dbmanager
 {
 private:
-    MYSQL *conn;
+    MYSQL *conn=NULL;
 public:
     dbmanager(){
     conn = mysql_init(NULL);
@@ -46,15 +46,15 @@ void displayquestions(){
         }
     while ((row = mysql_fetch_row(res))!= NULL)
         {
-           cout << "ID: " << row[0]
-                << ", Subject ID: " << row[1]
-                << ", Title: " << row[2]
-                << ", A: " << row[3]
-                << ", B: " << row[4]
-                << ", C: " << row[5]
-                << ", D: " << row[6]
-                << ", Answer Key: " << row[7]
-                << ", Evaluation Criteria ID: " << row[8] << "\n";
+           cout << "\n\nID: " << row[0]
+                << "\nSubject ID: " << row[1]
+                << "\nTitle: " << row[2]
+                << "\nA: " << row[3]
+                << "\n B: " << row[4]
+                << "\n C: " << row[5]
+                << "\n D: " << row[6]
+                << "\nAnswer Key: " << row[7]
+                << "\n Evaluation Criteria ID: " << row[8] <<endl;
 
         }
      mysql_free_result(res);
@@ -103,9 +103,54 @@ bool update(int id,
             cerr << "Delete query failed. Error: " << mysql_error(conn) << "\n";
         }
     }
+    void specificquestion(int id)
+    {
+        char query[256];
+        sprintf(query, "SELECT * FROM questionbank WHERE id=%d", id);
+        if (mysql_query(conn, query))
+        {
+            cerr << "Select specific question query failed. Error: " << mysql_error(conn) << "\n";
+            return;
+        }
+
+        MYSQL_RES *res = mysql_store_result(conn);
+        if (res == NULL)
+        {
+            cerr << "mysql_store_result() failed. Error: " << mysql_error(conn) << "\n";
+            return;
+        }
+
+        MYSQL_ROW row = mysql_fetch_row(res);
+        if (row != NULL)
+        {
+            cout << "\n\nID: " << row[0]
+                 << "\nSubject ID: " << row[1]
+                 << "\nTitle: " << row[2]
+                 << "\nA: " << row[3]
+                 << "\nB: " << row[4]
+                 << "\nC: " << row[5]
+                 << "\nD: " << row[6]
+                 << "\nAnswer Key: " << row[7]
+                 << "\nEvaluation Criteria ID: " << row[8] << endl;
+        }
+        else
+        {
+            cout << "No question found with ID: " << id << endl;
+        }
+
+        mysql_free_result(res);
+    }
 
 
 };
+void displaymenu(){
+    cout<<"\n1. Insert Question\n";
+    cout<<"2. Display Questions\n";
+    cout<<"3. Update Question\n";
+    cout<<"4. Delete Question\n";
+    cout<<"5.display specific question \n";
+    cout<<"6. Exit\n";
+}
 
 int main()
 {
@@ -116,11 +161,7 @@ int main()
     {
         cout<<"==========================";
         cout<<"enter your choice";
-        cout<<"\n1. Insert Question\n";
-        cout<<"2. Display Questions\n";
-        cout<<"3. Update Question\n";
-        cout<<"4. Delete Question\n";
-        cout<<"5. Exit\n";
+        displaymenu();
         cin>>choice;
 
 
@@ -204,8 +245,16 @@ int main()
                 ptrdbmanager->deletequestion(id);
             }
             break;  
-        
         case 5:
+            {
+                int id;
+                cout << "Enter ID of the specific question to display: ";
+                cin >> id;
+                ptrdbmanager->specificquestion(id);
+            }
+            break;
+        
+        case 6:
             delete ptrdbmanager;
             cout << "Exiting the program.\n";
             return 0;
