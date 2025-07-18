@@ -19,7 +19,7 @@ class Manager : public Employee
     public:
     void approveLeave()
     {
-        cout<<name << " approived the leave " <<endl ;
+        cout<<name << " approved the leave " <<endl ;
     }
 };
 

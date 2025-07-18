@@ -29,9 +29,16 @@ public:
     }
 };
 
+class Bird : public Animal {
+public:
+    void fly() {
+        cout << "Bird special behavior!" << endl;
+    }
+};
+
 int main() {
     Labrador lab;
-    lab.eat();             // Inherited from Animal
+    lab.eat();             
     lab.giveBirth();       // Inherited from Mammal
     lab.bark();            // Inherited from Dog
     lab.specialBehavior(); // Defined in Labrador

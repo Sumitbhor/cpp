@@ -24,12 +24,12 @@ public:
 
 int main() {
     Dog dog;
-    dog.eat();  // Inherited from Animal
-    dog.bark(); // Defined in Dog
+    dog.eat();  
+    dog.bark(); 
 
     Cat cat;
-    cat.eat();  // Inherited from Animal
-    cat.meow(); // Defined in Cat
+    cat.eat();  
+    cat.meow(); 
 
     return 0;
 }
