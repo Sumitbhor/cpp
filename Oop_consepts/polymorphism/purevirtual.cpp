@@ -2,7 +2,7 @@
 using namespace std ;
 
 //abstract class
-//pure abstract base class
+
 class Shape
 {
 public:
