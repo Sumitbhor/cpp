@@ -30,11 +30,5 @@ Employee EmployeeRepository:: get(int id ){
     }
 }
 vector<Employee>EmployeeRepository::getAllEmployees(){
-    vector<Employee>employees={
-        {1,"sumit",100000, 4,19},
-        {2,"sanika",200000, 6,19},
-        {3,"sarthak",300000, 7,19},
-        {4,"pankaj",400000, 7,19}
-    };
     return employees ;
 }

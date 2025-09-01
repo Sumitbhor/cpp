@@ -7,11 +7,12 @@ using namespace std ;
 
 class EmployeeRepository:public IEmployeeRepository{
     public :
+
         vector<Employee>employees ;
-        void add(Employee &employee);
-        void update (int id , Employee &employee );
-        void remove(int id );
-        Employee get(int id );
-        vector<Employee>getAllEmployees() ;
+        void add(Employee &employee) override;
+        void update (int id , Employee &employee )override;
+        void remove(int id )override;
+        Employee get(int id )override;
+        vector<Employee>getAllEmployees()override ;
 };
 #endif 
