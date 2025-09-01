@@ -25,14 +25,14 @@ int main() {
     s2.incrementA();
     staticdemo::incrementB();
     
-    s3.incrementA();
-    staticdemo::incrementB();
+    // s3.incrementA();
+    // staticdemo::incrementB();
     
-    s4.incrementA();
-    staticdemo::incrementB();
+    // s4.incrementA();
+    // staticdemo::incrementB();
     
-    s5.incrementA();
-    staticdemo::incrementB();
+    // s5.incrementA();
+    // staticdemo::incrementB();
     
     return 0;
 }

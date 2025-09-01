@@ -7,12 +7,12 @@ using namespace std;
 class Person {
 
 public:
-        string name;
-        int age;
+    string name;
+    int age;
     //constructor overloading
     Person(){
-            this->name="Sumit";
-           this->age=19;
+        this->name="Sumit";
+        this->age=19;
     }
     // Parameterized Constructor
     Person( string n, int a) {

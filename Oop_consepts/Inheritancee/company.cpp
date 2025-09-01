@@ -6,7 +6,7 @@ class Employee
 
 public:
    string name ;
-   int id ; 
+   int id ;  
 
    void displayInfo()
    {

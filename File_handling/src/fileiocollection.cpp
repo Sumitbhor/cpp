@@ -56,8 +56,8 @@ class FileIOManager{
 
 
 int main(){
-    std::cout<<"Hello"<<endl;
-    std::cout<<"Thank you for visiting Transflower"<<endl;
+    cout<<"Hello"<<endl;
+    cout<<"Thank you for visiting Transflower"<<endl;
     Person p1("Ravi Tambade",49);
     Person p2("Nikshi Navale",19);
     Person p3("Nirjala",20);
@@ -73,6 +73,6 @@ int main(){
 
     FileIOManager mgr;
     if(mgr.serialize(students)){
-        std::cout<<"All are saved"<<endl;
+        cout<<"All are saved"<<endl;
     }
 }
