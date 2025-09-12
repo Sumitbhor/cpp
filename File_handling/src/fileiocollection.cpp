@@ -10,7 +10,7 @@ class Person {
             int age;
         //constructor overloading
         Person(){
-                this->name="Sumit";
+            this->name="Sumit";
             this->age=19;
         }
         // Parameterized Constructor

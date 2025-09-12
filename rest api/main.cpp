@@ -1,110 +1,94 @@
+
+//must go BEFORE httplib
+#define WIN32_LEAN_AND_MEAN
+#define NOMINMAX
+#define byte win_byte_override // avoid conflict with std::byte
+#include <windows.h>
+#undef byte
+
 #include <iostream>
-#include <stdlib.h>
 #include "./services/EmployeeServices.h"
 #include "./repository/EmployeeRepository.h"
+#include "httplib.h"
+#include <memory>
+
 using namespace std;
+using namespace httplib;
+
 int main()
-{ // menu
-    int choice;
-    int id;
-    string name;
-    double salary;
-    int experience;
-    int age;
+{
+    Server svr;
+
     IEmployeeRepository *empRepo = new EmployeeRepository();
-    EmployeeServices empSer(empRepo);
+    
+    EmployeeServices  empSer(empRepo);
 
-    while (true)
-    {
 
-        cout << "\n***** Menu *****" << endl;
-        cout << "1. Add employee" << endl;
-        cout << "2.Update" << endl;
-        cout << "3. remove" << endl;
-        cout << "4. get by id" << endl;
-        cout << "5. get all" << endl;
-        cout << "6. exit" << endl;
-        cout << "enter your choice :" << endl;
-        cin >> choice;
-        switch (choice)
+    svr.Get("/api/Employees", [&empSer]( const Request &req, Response &res)
         {
-        case 1:
-        {
-            cout << "enter id of employee" << endl;
-            cin >> id;
-            cout << "enter name of employee" << endl;
-            cin >> name;
-            cout << "enter salary of employee" << endl;
-            cin >> salary;
-            cout << "enter experience of employee" << endl;
-            cin >> experience;
-            cout << "enter age of employee" << endl;
-            cin >> age;
-
-            Employee emp(id, name, salary, experience, age);
-            empSer.addEmployee(emp);
-            break;
-        }
-        case 2:{
-            cout<<"Enter id to update "<<endl ;
-            cin>>id ;
-             cout << "enter id of employee" << endl;
-            cin >> id;
-            cout << "enter name of employee" << endl;
-            cin >> name;
-            cout << "enter salary of employee" << endl;
-            cin >> salary;
-            cout << "enter experience of employee" << endl;
-            cin >> experience;
-            cout << "enter age of employee" << endl;
-            cin >> age;
-
-            Employee emp(id, name, salary, experience, age);
-            empSer.updateEmployee(id, emp);
-            break;
-        }
-        case 3 : {
-            cout<<"Enter id to remove "<<endl ;
-            cin>>id ;
-            empSer.removeEmployee(id);
-        }
-        case 4 :{
-            cout<<"Enter id to know information "<<endl ;
-            cin>>id ;
-           Employee e1= empSer.getEmployee(id);
-           cout<<"\nid: "<<e1.id;
-           cout<<"\nname: "<<e1.name;
-           cout<<"\nsalary: "<<e1.salary;
-           cout<<"\nexperience: "<<e1.experience;
-           cout<<"\nage: "<<e1.age;
-
-            break;
-        }
-
-        case 5 : {
-            vector<Employee> allemp=empSer.getAllemployees();
-            for(auto& e:allemp)
-            {
-                 cout<<"\nid: "<<e.id;
-                cout<<"\nname: "<<e.name;
-                cout<<"\nsalary: "<<e.salary;
-                cout<<"\nexperience: "<<e.experience;
-                cout<<"\nage: "<<e.age;
-            }
-            break;
-        }
-        case 6 :
-            cout<<"tata bye";
-            return 0 ;
         
-        default:
-            break;
+         vector<Employee> employees = empSer.getAllemployees();
+       
+
+        // Convert products to JSON and set response
+        //set json array
+        string json = "[";
+
+        for (const auto& employee : employees) {
+            //append json object to string 
+            json += "{\"id\":" + to_string(employee.id) + ",\"name\":\"" + employee.name + "\",\"Salary\":" + to_string(employee.salary) + "},";
         }
-    }
+
+        if (!employees.empty()) {
+            json.pop_back();  // Remove last comma
+        }
+        
+        //close json array
+        json += "]";
+
+        res.set_content(json, "text/json"); 
+        });
+
+
+    svr.Post("/api/Employee/add", [&empSer](const Request &req, Response &res)
+            {
+    
+                auto id = req.get_param_value("id");
+                auto name = req.get_param_value("name");
+                auto salary = req.get_param_value("salary");
+                auto experience = req.get_param_value("experience");
+                auto age = req.get_param_value("age");
+
+                Employee emp(stoi(id), name, stod(salary), stoi(experience), stoi(age));
+
+                empSer.addEmployee(emp);
+                res.set_content("Employee added: " + emp.name, "text/plain"); });
+
+    svr.Delete("/api/Employee/delete", [&empSer](const Request &req, Response &res)
+        {
+            auto id = req.get_param_value("id");
+            empSer.removeEmployee(stoi(id));
+            res.set_content("Employee deleted: " + id, "text/plain");
+        });
+
+    svr.Put("/api/Employee/update", [&empSer](const Request &req, Response &res)
+        { 
+            auto id = req.get_param_value("id");
+            auto name = req.get_param_value("name");
+            auto salary = req.get_param_value("salary");
+            auto experience = req.get_param_value("experience");
+            auto age = req.get_param_value("age");
+
+            Employee emp (stoi(id), name, stod(salary), stoi(experience), stoi(age));
+
+            empSer.updateEmployee(stoi(id), emp);
+            res.set_content("Employee updated: " + emp.name, "text/plain");
+        });
+
+    svr.listen("localhost", 9000);
     return 0;
 }
-//g++ -Iinclude -c ./services/EmployeeServices.cpp -o services.o
-//g++ -Iinclude -c ./repository/EmployeeRepository.cpp -o repo.o
-//g++ -Iinclude -c main.cpp -o main.o
-//g++ repo.o services.o main.o -o server.exe
 
+
+
+//g++ main.cpp ./services/EmployeeServices.cpp ./repository/EmployeeRepository.cpp -o server.exe -D_WIN32_WINNT=0x0A00 -lws2_32 -lwsock32
