@@ -10,6 +10,9 @@ class Employee {
         double salary;
         int experience; 
         int age;
+    Employee(){
+        
+    }
     Employee(int id , string name , double salary , int experience , int age) {
         this->id = id;
         this->name = name;

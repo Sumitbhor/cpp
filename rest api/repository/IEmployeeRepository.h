@@ -1,6 +1,7 @@
 #ifndef IEMPLOYEEREPOSITORY_H
 #define IEMPLOYEEREPOSITORY_H
 #include"../entitity/employee.h"
+#include"../IO/FileIoManager.h"
 #include <vector>
 using namespace std ;
 

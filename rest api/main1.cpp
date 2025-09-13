@@ -1,14 +1,14 @@
 #include <iostream>
 #include <stdlib.h>
-#include "httplib.h"
+//#include "httplib.h"
 #include "./services/EmployeeServices.h"
 #include "./repository/EmployeeRepository.h"
 #include <memory>
 using namespace std;
-using namespace httplib ;
+//using namespace httplib ;
 int main()
 { // menu
-    Server svr ;
+   // Server svr ;
     int choice;
     int id;
     string name;
@@ -113,3 +113,4 @@ int main()
 //g++ -Iinclude -c main.cpp -o main.o
 //g++ repo.o services.o main.o -o server.exe
 
+//g++ main.cpp ./services/EmployeeServices.cpp ./repository/EmployeeRepository.cpp ./IO/FileIoManager.cpp -o server.exe -D_WIN32_WINNT=0x0A00 -lws2_32 -lwsock32
