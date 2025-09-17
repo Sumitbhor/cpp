@@ -65,7 +65,7 @@ void Product::save(std::ofstream& ofs) const {
 
 
 
-//DeSerialization method to load product details from a binary file
+//DeSerialization method to load product details from a binary f ile
     void Product::load(std::ifstream& ifs) {
 
         int id; // Declare and initialize the local variable 'id'

@@ -1,10 +1,10 @@
 
 //must go BEFORE httplib
-#define WIN32_LEAN_AND_MEAN
-#define NOMINMAX
-#define byte win_byte_override // avoid conflict with std::byte
-#include <windows.h>
-#undef byte
+// #define WIN32_LEAN_AND_MEAN
+// #define NOMINMAX
+// #define byte win_byte_override // avoid conflict with std::byte
+// #include <windows.h>
+// #undef byte
 
 #include <iostream>
 #include "./services/EmployeeServices.h"
