@@ -11,7 +11,7 @@ bool EmployeeRepository :: add(Employee &emp){
     char query[512] ;
      dbmanager db;
         MYSQL* conn= db.getConnection();
-    sprintf(query , "INSERT INTO employees(id , name , salary , experience , age )VALUES( %d, '%s', %d, %d,%d)",
+    sprintf(query , "INSERT INTO employees(id , name , salary , experience , age )VALUES( %d, '%s', %2f, %d,%d)",
      emp.id , emp.name.c_str() , emp.salary, emp.experience, emp.age);
        if (mysql_query(conn, query))
         {
@@ -25,11 +25,11 @@ bool EmployeeRepository :: update (int id , Employee &emp ){
     char query[512] ;
        dbmanager db;
         MYSQL* conn= db.getConnection();
-        snprintf(query ,sizeof(query),  "UPDATE employees SET id=%d , name='%s' , salary=%d , experience=%d , age =%d WHERE id =%d",
-     emp.id , emp.name.c_str() , emp.salary, emp.experience, emp.age);
+        snprintf(query ,sizeof(query),  "UPDATE employees SET  name='%s' , salary=%2f , experience=%d , age =%d WHERE id =%d",
+      emp.name.c_str() , emp.salary, emp.experience, emp.age,emp.id);
        if (mysql_query(conn, query))
         {
-            cerr << "Insert query failed. Error: " << mysql_error(conn) << "\n";
+            cerr << "update query failed. Error: " << mysql_error(conn) << "\n";
             return false;
         }
         return true;
@@ -45,6 +45,7 @@ void EmployeeRepository :: remove(int id ){
             cerr << "Delete query failed. Error: " << mysql_error(conn) << "\n";
         }
 }
+
 vector<Employee> EmployeeRepository ::getAllEmployees(){
     vector <Employee> employees;
    dbmanager db;
