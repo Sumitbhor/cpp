@@ -16,6 +16,20 @@ using namespace httplib;
 int main() {
     Server svr;
 
+    // Enable CORS
+    svr.set_default_headers({
+        {"Access-Control-Allow-Origin", "*"},
+        {"Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS"},
+        {"Access-Control-Allow-Headers", "Content-Type"}
+    });
+
+    svr.Options(".*", [](const Request&, Response& res) {
+        res.set_header("Access-Control-Allow-Origin", "*");
+        res.set_header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+        res.set_header("Access-Control-Allow-Headers", "Content-Type");
+        res.status = 204;
+    });
+
     IEmployeeRepository* empRepo = new EmployeeRepository();
     EmployeeServices empService(empRepo);
     EmployeeController empController(empService);

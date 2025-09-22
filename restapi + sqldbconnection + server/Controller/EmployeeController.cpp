@@ -2,11 +2,13 @@
 #include <string>
 #include <vector>
 
-EmployeeController::EmployeeController(EmployeeServices& service) 
+/*EmployeeController::EmployeeController(EmployeeServices& service): 
 {
     empService = service;                                  
-}
+}*/
 
+
+EmployeeController::EmployeeController(EmployeeServices& service) : empService(service) {}
 void EmployeeController::getAllEmployees(const Request& req, Response& res) {
     vector<Employee> employees = empService.getAllemployees();
 

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Employee API Test</title>
+</head>
+<body>
+  <h2>Add Employee</h2>
+  
+  <form id="employeeForm">
+    <label>ID:</label>
+    <input type="number" id="id" required><br><br>
+
+    <label>Name:</label>
+    <input type="text" id="name" required><br><br>
+
+    <label>Salary:</label>
+    <input type="number" id="salary" required><br><br>
+
+    <label>Experience (years):</label>
+    <input type="number" id="experience" required><br><br>
+
+    <label>Age:</label>
+    <input type="number" id="age" required><br><br>
+
+    <button type="submit">Add Employee</button>
+  </form>
+
+  <h2>All Employees</h2>
+  <button onclick="getEmployees()">Get Employees</button>
+
+  <p id="output"></p>
+
+  <script>
+    // Base URLs for each API endpoint
+    const API_GET_ALL = "http://localhost:9000/api/Employees";
+    const API_ADD = "http://localhost:9000/api/Employee/add";
+    const API_UPDATE = "http://localhost:9000/api/Employee/update";
+    const API_DELETE = "http://localhost:9000/api/Employee/delete";
+
+    // Handle form submission (POST request)
+    document.getElementById("employeeForm").addEventListener("submit", async function(event) {
+      event.preventDefault();
+
+const formData = new URLSearchParams();
+formData.append("id", document.getElementById("id").value);
+formData.append("name", document.getElementById("name").value);
+formData.append("salary", document.getElementById("salary").value);
+formData.append("experience", document.getElementById("experience").value);
+formData.append("age", document.getElementById("age").value);
+
+const res = await fetch(API_ADD, {
+  method: "POST",
+  headers: { "Content-Type": "application/x-www-form-urlencoded" },
+  body: formData
+});
+
+    });
+
+    // Fetch all employees (GET request)
+    async function getEmployees() {
+      try {
+        const res = await fetch(API_GET_ALL);
+        if (!res.ok) throw new Error("Server error: " + res.status);
+
+        const data = await res.json();
+        document.getElementById("output").innerHTML =
+          "📋 All Employees:<br>" + JSON.stringify(data, null, 2);
+      } catch (err) {
+        document.getElementById("output").innerHTML = "❌ Error: " + err;
+      }
+    }
+  </script>
+</body>
+</html>
