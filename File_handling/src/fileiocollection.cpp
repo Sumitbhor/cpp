@@ -42,6 +42,7 @@ class FileIOManager{
                 for(int i=0;i<=allStudents.size();i++) 
                     {
                         allStudents[i].serialize(outFile);
+                    
                         status=true;
                     }
                 outFile.close();
