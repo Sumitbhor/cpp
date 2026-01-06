@@ -44,5 +44,5 @@ int main() {
 }
 
 
-
+//https://localhost:9000/api/Employees
 //g++ main.cpp ./services/EmployeeServices.cpp ./SQL_repository/EmployeeRepository.cpp ./Controller/EmployeeController.cpp ./Router/EmployeeRouter.cpp -o server.exe -D_WIN32_WINNT=0x0A00 -lws2_32 -lwsock32 -I "C:\Program Files\MySQL\MySQL Server 8.0\include" -L "C:\Program Files\MySQL\MySQL Server 8.0\lib" -lmysql
