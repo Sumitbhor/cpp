@@ -3,11 +3,9 @@
 class IInterviewPanel
 {
 private:
-    /* data */
+  /* data */
 public:
-  virtual void TakeInterview();
-
+  virtual void TakeInterview() = 0;
 };
-
 
 #endif

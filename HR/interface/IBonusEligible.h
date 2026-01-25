@@ -1,16 +1,11 @@
-#ifndef IBONUSELIGIBLE_H    
-# define IBONUSELIGIBLE_H  
+#ifndef IBONUSELIGIBLE_H
+#define IBONUSELIGIBLE_H
 class IBonusEligible
 {
 private:
     /* data */
 public:
-
-    virtual float  CalculateBonus();
-
-   
+    virtual float CalculateBonus() = 0;
 };
 
 #endif
-
-

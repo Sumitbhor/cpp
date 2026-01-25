@@ -7,9 +7,7 @@ class IAppraisable
 private:
     /* data */
 public:
-    
-    virtual void Conduct_Appraisable();
-   
+    virtual void Conduct_Appraisable() = 0;
 };
 
 #endif

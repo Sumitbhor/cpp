@@ -5,6 +5,6 @@ class ITrainer
 private:
     /* data */
 public:
-   virtual void Tain();
+    virtual void Tain() = 0;
 };
 #endif
