@@ -24,13 +24,13 @@ public:
                  string email,
                  string phone,
                  string city,
-                 double salary,
+                 double baseSalary,
                  double HRA,
                  double Allowance,
                  double incentive,
                  int target,
                  int achiveTarget,
-                 float bonus):SalesEmployee(id,firstname,lastname,email,phone,city,salary,HRA,Allowance,incentive,target,achiveTarget)
+                 float bonus):SalesEmployee(id,firstname,lastname,email,phone,city,baseSalary,HRA,Allowance,incentive,target,achiveTarget)
     {
         this->bonus = bonus;
     }
@@ -43,11 +43,11 @@ public:
     {
         if (this->target <= this->achiveTarget)
         {
-            return this->salary + this->HRA + this->Allowance + this->incentive;
+            return this->baseSalary + this->HRA + this->Allowance + this->incentive;
         }
         else
         {
-            return this->salary + this->HRA + this->Allowance;
+            return this->baseSalary + this->HRA + this->Allowance;
         }
     }
 
@@ -57,22 +57,22 @@ public:
     }
     void Conduct_Appraisable() override
     {
-        cout << "Manager appraisal completed.";
+        cout << "\nManager appraisal completed.";
     }
 
     void ApproveLeaves() override
     {
-        cout << "Leave approved by Sales Manager.";
+        cout << "\nLeave approved by Sales Manager.";
     }
 
     void TakeInterview() override
     {
-        cout << "Sales Manager conducting interview.";
+        cout << "\nSales Manager conducting interview.";
     }
 
-    void Tain() override
+    void Train() override
     {
-        cout << "Sales Manager training sales team.";
+        cout << "\nSales Manager training sales team.";
     }
 };
 #endif

@@ -24,7 +24,7 @@ public:
         this->email = "";
         this->phone = "";
         this->city = "";
-        this->salary = 0;
+        this->baseSalary = 0;
         this->HRA = 0;
         this->Allowance = 0;
         this->incentive = 0;
@@ -32,13 +32,24 @@ public:
         this->achiveTarget = 0;
     }
 
-    SalesEmployee(int id, string firstname, string lastname, string email, string phone, string city, double salary, double HRA, double Allowance, double incentive, int target, int achiveTarget):Employee(id,firstname,lastname,email,phone,city,salary,HRA,Allowance)
+    SalesEmployee(int id,
+                  string firstname,
+                  string lastname,
+                  string email,
+                  string phone,
+                  string city,
+                  double baseSalary,
+                  double HRA,
+                  double Allowance,
+                  double incentive,
+                  int target,
+                  int achiveTarget) : Employee(id, firstname, lastname, email, phone, city, baseSalary, HRA, Allowance)
     {
         this->incentive = incentive;
         this->target = target;
         this->achiveTarget = achiveTarget;
     }
-    void doWork()
+    void doWork() override
     {
         cout << "do your work " << endl;
     }
@@ -47,17 +58,17 @@ public:
     {
         if (this->target <= this->achiveTarget)
         {
-            double totalsalary = this->salary + this->HRA + this->Allowance + this->incentive;
+            double totalsalary = this->baseSalary + this->HRA + this->Allowance + this->incentive;
         }
         else
         {
-            double totalsalary = this->salary + this->HRA + this->Allowance;
+            double totalsalary = this->baseSalary + this->HRA + this->Allowance;
         }
     }
 
     void Conduct_Appraisable() override
     {
-        cout << "Sales Employee appraisal completed." << endl;
+        cout << "\nSales Employee appraisal completed." << endl;
     }
 };
 #endif

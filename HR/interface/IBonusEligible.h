@@ -2,8 +2,7 @@
 #define IBONUSELIGIBLE_H
 class IBonusEligible
 {
-private:
-    /* data */
+   
 public:
     virtual float CalculateBonus() = 0;
 };

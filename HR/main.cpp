@@ -20,7 +20,9 @@ int main()
     interviewPanel->TakeInterview();
 
     ITrainer *trainer = &manager;
-    trainer->Tain();          
+    trainer->Train();     
+    
+    
 }
 /*
 g++ -I include -c Employee.cpp -o build/Employee.o

@@ -2,9 +2,8 @@
 #define ITrainer_h
 class ITrainer
 {
-private:
-    /* data */
+
 public:
-    virtual void Tain() = 0;
+    virtual void Train() = 0;
 };
 #endif
