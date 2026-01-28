@@ -1,13 +1,12 @@
-#include "./Employee.cpp"
+#include "../include/Employee.h"
+#include"../include/SalesEmployee.h"
+#include"../include/SalesManager.h"
 #include <string>
-#include "./SalesManager.cpp"
+
 using namespace std;
 
 int main()
 {
-    // Employee emp(1 ,"sumit", "bhor", "sumit227@gmial.com","853008699","manchar", 50000,10000, 5000  );
-    // string emp1= emp.to_String();
-    // cout<<emp1<<endl ;
 
     SalesManager manager(2, "rahul", "shinde", "rahulshinde@gmail.com", "9876543210", "pune", 60000, 12000, 6000, 5000, 10, 12, 800);
     IAppraisable *appraisable = &manager;
@@ -25,10 +24,11 @@ int main()
     
 }
 /*
-g++ -I include -c Employee.cpp -o build/Employee.o
-g++ -I include -c SalesEmployee.cpp -o build/SalesEmployee.o
-g++ -I include -c SalesManager.cpp -o build/SalesManager.o
-g++ -I include -c main.cpp -o build/main.o
-cd build
-g++ -I include main.o SalesManager.o SalesEmployee.o Employee.o -o main.exe
+
+g++ -I include -c ./src/Employee.cpp -o ./build/Employee.o
+g++ -I include -c ./src/SalesEmployee.cpp -o ./build/SalesEmployee.o
+g++ -I include -c ./src/SalesManager.cpp -o ./build/SalesManager.o
+g++ -I include -c ./src/main.cpp -o ./build/main.o
+g++ ./build/SalesManager.o ./build/SalesEmployee.o ./build/Employee.o ./build/main.o -o ./build/main.exe
+
 */

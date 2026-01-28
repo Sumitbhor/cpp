@@ -1,15 +1,20 @@
 #include <iostream>
 using namespace std;
 #include <string>
-#include "ISalesEmployee.h"
+#include "./Employee.h"
+#include "./interfaces/IAppraisable.h"
+
 #ifndef SalesEmployee_h
 #define SalesEmployee_h
 
-class SalesEmployee : public ISalesEmployee
+class SalesEmployee : public Employee, public IAppraisable
 
 {
 
 public:
+    double incentive;
+    int target;
+    int achiveTarget;
     SalesEmployee()
     {
     }
@@ -25,11 +30,14 @@ public:
                   double Allowance,
                   double incentive,
                   int target,
-                  int achiveTarget);
+                  int achiveTarget) : Employee(id, firstname, lastname, email, phone, city, baseSalary, HRA, Allowance)
+    {
+        this->incentive = incentive;
+        this->target = target;
+        this->achiveTarget = achiveTarget;
+    }
     void doWork() override;
-
-    double computePay() override;
-
-    void Conduct_Appraisable() override;
+    double computePay();
+    void Conduct_Appraisable();
 };
 #endif

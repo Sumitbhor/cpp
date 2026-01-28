@@ -1,9 +1,21 @@
-#include "IEmployee.h"
 #ifndef Employee_h
 #define Employee_h
-class Employee : public IEmployee
+#include <iostream>
+#include <string>
+using namespace std;
+class Employee
 {
 public:
+    int id;
+    string firstname;
+    string lastname;
+    string email;
+    string phone;
+    string city;
+    double baseSalary;
+    double HRA;
+    double Allowance;
+
     Employee() {}
     Employee(int id, string firstname, string lastname, string email, string phone, string city, double salary, double HRA, double Allowance)
     {
@@ -18,8 +30,8 @@ public:
         this->HRA = HRA;
         this->Allowance = Allowance;
     }
-    void doWork() override;
-    double computePay() override;
-    string to_String() override;
+    virtual void doWork() = 0;
+    double computePay();
+    string to_String();
 };
 #endif
