@@ -17,18 +17,9 @@ public:
     double Allowance;
 
     Employee() {}
-    Employee(int id, string firstname, string lastname, string email, string phone, string city, double salary, double HRA, double Allowance)
+    Employee(int id, string firstname, string lastname, string email, string phone, string city, double salary, double HRA, double Allowance): id(id), firstname(firstname), lastname(lastname), email(email), phone(phone), city(city), baseSalary(salary), HRA(HRA), Allowance(Allowance)
     {
-
-        this->id = id;
-        this->firstname = firstname;
-        this->lastname = lastname;
-        this->email = email;
-        this->baseSalary = salary;
-        this->city = city;
-        this->phone = phone;
-        this->HRA = HRA;
-        this->Allowance = Allowance;
+        
     }
     virtual void doWork() = 0;
     double computePay();

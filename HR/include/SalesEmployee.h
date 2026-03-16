@@ -30,14 +30,13 @@ public:
                   double Allowance,
                   double incentive,
                   int target,
-                  int achiveTarget) : Employee(id, firstname, lastname, email, phone, city, baseSalary, HRA, Allowance)
+                  int achiveTarget) : Employee(id, firstname, lastname, email, phone, city, baseSalary, HRA, Allowance), incentive(incentive), target(target), achiveTarget(achiveTarget)
     {
-        this->incentive = incentive;
-        this->target = target;
-        this->achiveTarget = achiveTarget;
+       
     }
     void doWork() override;
     double computePay();
+
     void Conduct_Appraisable();
 };
 #endif
